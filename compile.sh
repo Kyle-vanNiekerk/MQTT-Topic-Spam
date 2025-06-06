@@ -1,0 +1,1 @@
+javac -cp .:org.eclipse.paho.client.mqttv3-1.2.5.jar *.java

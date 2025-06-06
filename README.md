@@ -6,6 +6,12 @@ This program is designed to rapidly publish messages to specified MQTT topics in
 
 The tool repeatedly publishes timestamped messages to one or more MQTT topics at a high rate. This can help you detect and analyze feedback loops or excessive message propagation in your MQTT infrastructure.
 
+## How It Works
+
+- The **publisher** rapidly sends messages to all configured topics for 5 seconds.
+- At the same time, a **subscriber** connects to the same topics and monitors incoming messages.
+- After the publisher stops, the subscriber continues to listen. If any topic continues to receive messages, the program will report a possible feedback loop for that topic.
+
 ## Setup
 
 ### 1. Configuration
@@ -16,10 +22,10 @@ A sample configuration might look like:
 ```
 Protocol = mqtts
 Host/IP = your.mqtt.broker.address
-Port = 1883
+Port = 8883
 MQTT Topic = your/topic/one
 MQTT Topic = your/topic/two
-TLS Encryption = false
+TLS Encryption = true
 Cert Required = false
 Username = your_username
 Password = your_password
@@ -54,15 +60,19 @@ Compile all Java files with:
 bash compile.sh
 ```
 
-### 4. Run the Publisher
+### 4. Run the Publisher and Subscriber
 
-Start the publisher with:
+Start the program with:
 
 ```sh
 java -cp .:org.eclipse.paho.client.mqttv3-1.2.5.jar Publisher
 ```
 
+- The publisher will send messages for 5 seconds, then stop.
+- The subscriber will continue running and report any topics that are still being updated, indicating a possible feedback loop.
+
 ## Notes
 
 - The program will publish messages as fast as possible to all configured topics.
 - Use this tool only in test environments or with permission, as it can generate a high volume of traffic.
+- The subscriber will continue running after the publisher stops, so you can monitor for feedback loops.

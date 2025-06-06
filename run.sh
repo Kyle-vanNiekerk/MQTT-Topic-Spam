@@ -1,1 +1,1 @@
-java -cp .:org.eclipse.paho.client.mqttv3-1.2.5.jar Publisher
+java -cp .:org.eclipse.paho.client.mqttv3-1.2.5.jar Spam

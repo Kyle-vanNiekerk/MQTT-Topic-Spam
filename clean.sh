@@ -1,1 +1,1 @@
-rm FileHandler.class FileHandler$MqttConfig.class Publisher.class SSLSocketFactoryUtil.class SSLSocketFactoryUtil$1.class
+rm FileHandler.class FileHandler$MqttConfig.class Spam.class SSLSocketFactoryUtil.class SSLSocketFactoryUtil$1.class
